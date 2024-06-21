@@ -1,0 +1,63 @@
+class Policyholder:    
+    def __init__(self, name, policy_number, product, is_active=True):
+        self.name = name
+        self.policy_number = policy_number
+        self.product = product        
+        self.is_active = is_active
+    def suspend(self):
+        self.is_active = False
+        print(f"{self.name}'s policy has been suspended.")
+    def reactivate(self):
+        self.is_active = True
+        print(f"{self.name}'s policy has been reactivated.")
+
+
+class Product:
+    def __init__(self, name, description, is_active=True): 
+        self.name = name
+        self.description = description
+        self.is_active = is_active
+    def update_description(self, new_description):
+        self.description = new_description
+        print(f"Description for product {self.name} has been updated.")
+    def suspend(self):
+        self.is_active = False 
+        print(f"Product {self.name} has been suspended.")
+
+
+class Payment:
+    def __init__(self, policyholder, amount, is_paid=False):
+        self.policyholder = policyholder
+        self.amount = amount
+        self.is_paid = is_paid
+    def process_payment(self):
+        self.is_paid = True  
+        print(f"Payment of {self.amount}$ processed for {self.policyholder.name}.")
+    def send_payment_reminder(self):
+        print(f"Payment reminder sent to {self.policyholder.name}.")
+    def apply_penalty(self, penalty_amount):
+        self.amount += penalty_amount 
+        print(f"Penalty of {penalty_amount}$ applied to {self.policyholder.name}'s payment.")
+
+# Creating Policyholders
+policyholder1 = Policyholder("Elizabeth", "P1001", "Life Insurance")
+policyholder2 = Policyholder("Ken", "P1002", "Health Insurance")
+
+# Creating Payments
+payment1 = Payment(policyholder1, 100)
+payment2 = Payment(policyholder2, 150)
+# Processing Payments
+payment1.process_payment()
+payment2.process_payment()
+# Applying Penalty
+payment2.apply_penalty(20)
+# To displaying Account Details
+def display_account_details(policyholder):
+    print(f"Name: {policyholder.name}")   
+    print(f"Policy Number: {policyholder.policy_number}")
+    print(f"Product: {policyholder.product}")
+    print(f"Status: {'Active' if policyholder.is_active else 'Suspended'}") 
+    print("")
+# To displaying account details of the policyholders
+display_account_details(policyholder1)
+display_account_details(policyholder2)
